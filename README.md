@@ -1,106 +1,125 @@
-# ПУШ - Аналог Strava для РФ
+# Push Run App
 
-## Описание
-ПУШ - это приложение для отслеживания физической активности, аналогичное Strava, но адаптированное для российского рынка. Приложение позволяет пользователям отслеживать свои тренировки, делиться достижениями с друзьями и участвовать в челленджах.
+A Strava-like application for the Russian market.
 
-## Технологический стек
+## Features
 
-### Фронтенд
-- Vue 3 + Ionic (Capacitor) для мобильной платформы
-- shadcn/ui для компонентов интерфейса
-- PWA (Progressive Web App) для установки на смартфон
-- Яндекс.Карты для отображения маршрутов
+- User authentication with GitHub OAuth
+- Activity tracking and statistics
+- Social features (friends, likes, comments)
+- Achievements system
+- Challenges
+- Route planning with Yandex Maps integration
+- Weather information
 
-### Бэкенд
-- Go (Gin) для основного API
-- PostgreSQL для хранения данных
-- Redis для кеширования
+## Tech Stack
 
-## Функциональность MVP
+- Frontend: Vue.js, TypeScript
+- Backend: NestJS, TypeScript
+- Database: PostgreSQL
+- Authentication: JWT, GitHub OAuth
+- Maps: Yandex Maps API
 
-### Трекинг
-- Отслеживание маршрутов через GPS
-- Базовая статистика (дистанция, время, скорость)
-- Интеграция с Яндекс.Картами
+## Prerequisites
 
-### Социальные функции
-- Подписки на других пользователей
-- Лента активностей
-- Лайки и комментарии
-- Система друзей
+- Node.js (v16 or later)
+- PostgreSQL
+- GitHub OAuth App credentials
+- Yandex Maps API key
 
-### Достижения и награды
-- Автоматическое отслеживание прогресса
-- Различные типы достижений
-- Награды за выполнение
+## Installation
 
-### Челленджи
-- Создание и участие в челленджах
-- Прогресс выполнения
-- Рейтинг участников
-
-## Интеграции
-- ВКонтакте API для авторизации и шеринга
-- Telegram Bot для уведомлений
-- Яндекс.Карты для отображения маршрутов
-
-## Установка и запуск
-
-### Требования
-- Node.js 18+
-- Go 1.21+
-- PostgreSQL 15+
-- Redis 7+
-
-### Запуск бэкенда
+1. Clone the repository:
 ```bash
-cd backend
-go mod download
-go run main.go
+git clone https://github.com/your-username/push-run-app.git
+cd push-run-app
 ```
 
-### Запуск фронтенда
+2. Install frontend dependencies:
 ```bash
 cd frontend
 npm install
+```
+
+3. Install backend dependencies:
+```bash
+cd ../backend-nest
+npm install
+```
+
+4. Create a `.env` file in the backend-nest directory with the following variables:
+```env
+# Server
+PORT=3000
+
+# Database
+DB_HOST=localhost
+DB_PORT=5432
+DB_USERNAME=postgres
+DB_PASSWORD=postgres
+DB_DATABASE=push_run_app
+
+# JWT
+JWT_SECRET=your-secret-key
+JWT_EXPIRES_IN=7d
+
+# GitHub OAuth
+GITHUB_CLIENT_ID=your-github-client-id
+GITHUB_CLIENT_SECRET=your-github-client-secret
+GITHUB_CALLBACK_URL=http://localhost:3000/auth/github/callback
+
+# Yandex Maps
+YANDEX_MAPS_API_KEY=your-yandex-maps-api-key
+```
+
+5. Start the development servers:
+```bash
+# Terminal 1 - Backend
+cd backend-nest
+npm run start:dev
+
+# Terminal 2 - Frontend
+cd frontend
 npm run dev
 ```
 
-## План развития
-1. Месяц 1:
-   - Прототип в Figma
-   - Базовый трекинг (GPS + статистика)
-   - Авторизация через ВК
+The application will be available at:
+- Frontend: http://localhost:5173
+- Backend: http://localhost:3000
+- API Documentation: http://localhost:3000/api
 
-2. Месяц 2:
-   - Лента активностей
-   - Челленджи
-   - PWA-оптимизация
+## Project Structure
 
-3. Месяц 3:
-   - Тест с 100 пользователями
-   - Исправление багов
-   - Подготовка к продвижению
-
-## Структура проекта
 ```
-push_run_app/
-├── frontend/           # Vue 3 + Ionic приложение
+push-run-app/
+├── frontend/            # Vue.js frontend application
 │   ├── src/
-│   │   ├── components/ # UI компоненты
-│   │   ├── pages/      # Страницы приложения
-│   │   ├── services/   # API сервисы
-│   │   └── store/      # Vuex хранилище
-│   └── public/         # Статические файлы
-├── backend/            # Go сервер
-│   ├── cmd/           # Точка входа
-│   ├── internal/      # Внутренние пакеты
-│   │   ├── models/    # Модели данных
-│   │   ├── services/  # Бизнес-логика
-│   │   └── handlers/  # HTTP обработчики
-│   └── pkg/           # Общие пакеты
-└── mobile/            # Нативные модули для Capacitor
+│   │   ├── components/  # Vue components
+│   │   ├── views/       # Page components
+│   │   ├── router/      # Vue Router configuration
+│   │   ├── store/       # Vuex store
+│   │   └── assets/      # Static assets
+│   └── package.json     # Frontend dependencies
+│
+├── backend-nest/        # NestJS backend application
+│   ├── src/
+│   │   ├── models/      # Data models and DTOs
+│   │   ├── modules/     # Feature modules
+│   │   ├── config/      # Configuration
+│   │   └── main.ts      # Application entry point
+│   └── package.json     # Backend dependencies
+│
+└── README.md            # Project documentation
 ```
 
-## Лицензия
-MIT
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
